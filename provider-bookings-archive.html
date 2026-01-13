@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Архив бронирований — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+
+  <div class="service-layout">
+
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div class="service-main">
+
+      <h1>Архив бронирований</h1>
+
+      <p style="font-size:14px;color:#666;margin-bottom:24px;">
+        Здесь отображаются завершённые и отменённые бронирования.
+        Эти заказы уже не требуют действий.
+      </p>
+
+      <div id="archiveBookings">
+        <p><em>Загрузка…</em></p>
+      </div>
+
+      <div style="margin-top:32px;">
+        <a href="provider-bookings.html" class="nav-action">
+          ← Вернуться к бронированиям
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="provider-bookings-archive.js"></script>
+</body>
+</html>

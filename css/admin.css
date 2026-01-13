@@ -1,0 +1,207 @@
+/* =========================
+   ADMIN BASE
+========================= */
+
+.admin-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.admin-nav__logo {
+  font-weight: 600;
+}
+
+.admin-nav__menu {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-nav__menu a {
+  text-decoration: none;
+  color: #444;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.admin-nav__menu a.active {
+  background: #eef4ff;
+  color: #1d4ed8;
+  font-weight: 500;
+}
+
+.admin-nav__right button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* =========================
+   TABLES
+========================= */
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px;
+}
+
+.admin-table th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.admin-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: inline-block;
+}
+
+.admin-badge.active {
+  background: #e6f7ec;
+  color: #1e7f43;
+}
+
+.admin-badge.blocked {
+  background: #fdecea;
+  color: #b42318;
+}
+/* =========================
+   ADMIN SERVICE VIEW
+========================= */
+
+.admin-service-view {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  height: calc(100vh - 56px); /* header height */
+}
+
+.service-preview {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.admin-panel {
+  border-left: 1px solid #e5e5e5;
+  padding: 16px;
+  background: #fafafa;
+  overflow-y: auto;
+}
+/* =========================
+   ADMIN SERVICES
+========================= */
+
+.admin-services {
+  padding: 20px;
+}
+
+.admin-services h1 {
+  margin-bottom: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.service-actions button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* badges already standardized */
+/* =========================
+   ADMIN USERS
+========================= */
+
+.admin-users {
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.contacts {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* roles as admin-badges */
+
+.admin-badge.client {
+  background: #eef4ff;
+  color: #1d4ed8;
+}
+
+.admin-badge.provider {
+  background: #e6f7ec;
+  color: #1e7f43;
+}
+
+.admin-badge.admin {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.actions button {
+  margin-right: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+/* =========================
+   ADMIN DASHBOARD
+========================= */
+
+.admin-dashboard {
+  padding: 20px;
+}
+
+.admin-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-card {
+  border: 1px solid #e5e5e5;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.admin-card h3 {
+  margin-top: 0;
+}
+
+.admin-card a {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  color: #1d4ed8;
+  font-weight: 500;
+}

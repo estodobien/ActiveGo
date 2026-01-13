@@ -1,0 +1,33 @@
+<div class="admin-users">
+  <h1>Пользователи</h1>
+
+  <div class="filters">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Поиск по имени или email..."
+    />
+
+    <select id="roleFilter">
+      <option value="">Все роли</option>
+      <option value="client">Клиент</option>
+      <option value="provider">Поставщик</option>
+      <option value="admin">Администратор</option>
+    </select>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Пользователь</th>
+        <th>Роль</th>
+        <th>Контакты</th>
+        <th>Дата создания</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody id="usersBody"></tbody>
+  </table>
+</div>
+
+

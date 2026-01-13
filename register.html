@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+<script type="module" src="header.js"></script>
+
+<div class="container" style="max-width:480px;">
+
+  <h1 id="registerTitle">Регистрация клиента</h1>
+
+  <p style="font-size:14px;color:#666;margin-bottom:12px;">
+    Вы регистрируетесь как <strong id="roleLabel">клиент</strong>
+  </p>
+
+  <!-- 🧠 СМЫСЛОВОЙ БЛОК -->
+  <div
+    id="roleDescription"
+    style="
+      font-size:15px;
+      line-height:1.5;
+      margin-bottom:24px;
+      padding:14px 16px;
+      background:#f9fafb;
+      border:1px solid #e5e7eb;
+      border-radius:12px;
+    "
+  >
+    Зарегистрируйтесь, чтобы:
+    <br>• бронировать услуги
+    <br>• управлять своими заказами
+    <br>• получать подтверждения и уведомления
+  </div>
+
+  <form id="registerForm">
+
+    <!-- 🔑 РОЛЬ (ИСТОЧНИК ПРАВДЫ) -->
+    <input type="hidden" id="role" value="client">
+
+    <input type="text" id="name" placeholder="Имя" required><br><br>
+    <input type="email" id="email" placeholder="Email" required><br><br>
+    <input type="password" id="password" placeholder="Пароль" required><br><br>
+
+    <button type="submit" class="btn" style="width:100%;">
+      Зарегистрироваться
+    </button>
+
+  </form>
+
+  <div id="result" style="margin-top:12px;"></div>
+
+  <hr style="margin:30px 0;">
+
+  <!-- GOOGLE -->
+  <p style="font-size:14px;color:#666;margin-bottom:10px;">
+    Или зарегистрироваться через
+  </p>
+
+  <button
+    id="googleRegisterBtn"
+    type="button"
+    class="btn btn-outline"
+    style="width:100%;"
+  >
+    <img
+      src="https://www.svgrepo.com/show/475656/google-color.svg"
+      style="width:18px;vertical-align:middle;margin-right:8px;"
+    >
+    Google
+  </button>
+
+  <hr style="margin:30px 0;">
+
+  <p style="font-size:14px;margin-bottom:8px;">
+    Хотите зарабатывать на ActiveGo?
+  </p>
+
+  <!-- 🔁 ПЕРЕКЛЮЧАТЕЛЬ РОЛИ -->
+  <button
+    id="switchRoleBtn"
+    type="button"
+    class="btn btn-outline"
+    style="width:100%;"
+  >
+    Зарегистрироваться как поставщик
+  </button>
+
+</div>
+
+<script type="module" src="auth.js"></script>
+
+<script type="module">
+  import { supabase } from './supabaseClient.js';
+
+  const roleInput = document.getElementById('role');
+  const roleLabel = document.getElementById('roleLabel');
+  const titleEl   = document.getElementById('registerTitle');
+  const switchBtn = document.getElementById('switchRoleBtn');
+  const googleBtn = document.getElementById('googleRegisterBtn');
+  const descBox   = document.getElementById('roleDescription');
+
+  /* =========================
+     ROLE UI
+  ========================= */
+  function setRole(role) {
+    if (role === 'provider') {
+      roleInput.value = 'provider';
+      roleLabel.textContent = 'поставщик';
+      titleEl.textContent = 'Регистрация поставщика';
+      switchBtn.textContent = 'Зарегистрироваться как клиент';
+
+      descBox.innerHTML = `
+        Создайте аккаунт поставщика, чтобы:
+        <br>• добавлять и управлять своими услугами
+        <br>• получать заказы от клиентов
+        <br>• отслеживать доход и бронирования
+        <br><br>
+        После регистрации потребуется
+        заполнить профиль и пройти модерацию.
+      `;
+    } else {
+      roleInput.value = 'client';
+      roleLabel.textContent = 'клиент';
+      titleEl.textContent = 'Регистрация клиента';
+      switchBtn.textContent = 'Зарегистрироваться как поставщик';
+
+      descBox.innerHTML = `
+        Зарегистрируйтесь, чтобы:
+        <br>• бронировать услуги
+        <br>• управлять своими заказами
+        <br>• получать подтверждения и уведомления
+      `;
+    }
+  }
+
+  /* =========================
+     ROLE SWITCH BUTTON
+  ========================= */
+  switchBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const nextRole =
+      roleInput.value === 'client'
+        ? 'provider'
+        : 'client';
+
+    setRole(nextRole);
+  });
+
+  /* =========================
+     INIT ROLE FROM URL
+     /register.html?role=provider
+  ========================= */
+  const params = new URLSearchParams(window.location.search);
+  const initialRole = params.get('role');
+
+  if (initialRole === 'provider') {
+    setRole('provider');
+  }
+
+  /* =========================
+     GOOGLE REGISTRATION
+  ========================= */
+  googleBtn.addEventListener('click', async () => {
+    const role = roleInput.value;
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo:
+          window.location.origin +
+          '/oauth-callback.html?role=' +
+          role
+      }
+    });
+
+    if (error) {
+      alert(error.message);
+    }
+  });
+</script>
+
+</body>
+</html>

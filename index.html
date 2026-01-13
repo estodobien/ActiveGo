@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>ActiveGo — экскурсии, активности и трансферы</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <!-- CONTENT -->
+  <div class="container">
+
+    <!-- 🔍 ПОИСК (НОВЫЙ БЛОК) -->
+    <div class="search-box">
+
+  <div class="search-input-wrapper">
+    <span class="search-icon" id="searchIcon">🔍</span>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Найти интересующую вас услугу"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="search-suggestions" id="searchSuggestions">
+    <div class="suggestion all" data-type="">Все услуги</div>
+    <div class="suggestion rental" data-type="rental">Аренда</div>
+    <div class="suggestion tour" data-type="tour">Туры</div>
+  </div>
+
+</div>
+
+    <!-- 🔍 КОНЕЦ ПОИСКА -->
+
+    <!-- Заголовок + подзаголовок -->
+    <div style="margin-bottom: 24px;">
+      <h2 style="margin-bottom: 8px;">Популярные предложения</h2>
+      <p style="color: var(--muted); margin: 0;">
+        Экскурсии, активности и трансферы, которые выбирают чаще всего
+      </p>
+    </div>
+
+    <!-- Карточки услуг -->
+    <div id="featuredServices"></div>
+
+    <!-- CTA -->
+    <div style="margin-top: 40px; text-align: center;">
+      <a href="catalog.html" class="btn" style="min-width: 260px;">
+        Смотреть все услуги
+      </a>
+    </div>
+
+  </div>
+
+  <!-- JS -->
+   <script type="module" src="/supabaseClient.js"></script>
+  <script type="module" src="header.js"></script>
+  <script type="module" src="index.js"></script>
+
+</body>
+</html>

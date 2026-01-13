@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Услуга — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ✅ flatpickr CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+  >
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <!-- PAGE CONTENT -->
+  <div class="container">
+
+    <!-- Хлебные крошки -->
+    <div style="margin-bottom:16px;font-size:14px;">
+      <a href="index.html" style="text-decoration:none;color:var(--muted);">
+        Главная
+      </a>
+      <span style="margin:0 6px;color:var(--muted);">›</span>
+      <a href="catalog.html" style="text-decoration:none;color:var(--muted);">
+        Каталог
+      </a>
+      <span style="margin:0 6px;color:var(--muted);">›</span>
+      <span style="color:var(--text);">Услуга</span>
+    </div>
+
+    <!-- =======================
+         SERVICE DETAILS
+    ======================== -->
+    <div id="serviceDetails">
+      <p style="color:var(--muted);">Загрузка услуги…</p>
+    </div>
+
+    <!-- =======================
+         BOOKING CARD
+    ======================== -->
+    <div id="bookingCard" class="card" style="margin-top:30px;display:none;">
+
+      <h3 style="margin-bottom:16px;">Бронирование</h3>
+
+      <!-- Диапазон дат (аренда) -->
+      <div class="booking-field">
+        <label>Даты аренды</label>
+        <input
+          type="text"
+          id="dateRange"
+          placeholder="Выберите даты"
+        >
+      </div>
+
+      <!-- Количество -->
+      <div class="booking-field">
+        <label id="quantityLabel">Количество</label>
+        <input
+          type="number"
+          id="quantity"
+          min="1"
+          value="1"
+        >
+
+        <small id="quantityHint">
+          Укажите количество
+        </small>
+
+        <!-- Остаток -->
+        <div
+          id="availabilityInfo"
+          style="margin-top:6px;font-size:14px;color:#555">
+        </div>
+      </div>
+
+      <!-- Цена -->
+      <div class="booking-field">
+        <label>Цена</label>
+        <div style="font-size:18px;font-weight:600;">
+          <span id="unitPrice">—</span> €
+          <span
+            style="font-size:14px;color:var(--muted);"
+            id="unitPriceLabel">
+          </span>
+        </div>
+      </div>
+
+      <!-- Итог -->
+      <div class="booking-field" style="margin-top:10px;">
+        <label>Итого</label>
+        <div style="font-size:22px;font-weight:700;">
+          <span id="totalPrice">—</span> €
+        </div>
+      </div>
+
+      <!-- Кнопка -->
+      <button class="btn" id="bookBtn" style="margin-top:20px;">
+        Забронировать
+      </button>
+
+      <p id="bookingResult" style="margin-top:12px;"></p>
+    </div>
+
+  </div>
+
+  <!-- ✅ ВАЖНО: flatpickr JS ПЕРВЫМ -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <!-- Твои модули -->
+  <script type="module" src="header.js"></script>
+  <script type="module" src="supabaseClient.js"></script>
+  <script type="module" src="service.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Авторизация...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="module">
+  import { supabase } from './supabaseClient.js';
+
+  // получаем роль из URL
+  const params = new URLSearchParams(window.location.search);
+  const role = params.get('role') || 'client';
+
+  async function handleOAuth() {
+    // получаем пользователя после OAuth
+    const {
+      data: { user },
+      error
+    } = await supabase.auth.getUser();
+
+    if (error || !user) {
+      console.error('OAuth error:', error);
+      document.body.innerText = 'Ошибка авторизации';
+      return;
+    }
+
+    // проверяем, есть ли профиль
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('id')
+      .eq('id', user.id)
+      .single();
+
+    // если профиля нет — создаём
+    if (!profile) {
+      await supabase.from('profiles').insert({
+        id: user.id,
+        role: role,
+        name:
+          user.user_metadata?.full_name ||
+          user.user_metadata?.name ||
+          ''
+      });
+    }
+
+    // редирект после успешного входа
+    window.location.href = 'catalog.html';
+  }
+
+  handleOAuth();
+</script>
+</head>
+
+<body style="font-family:sans-serif;text-align:center;padding-top:60px;">
+  <p>Завершаем авторизацию…</p>
+</body>
+</html>

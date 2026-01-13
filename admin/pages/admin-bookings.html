@@ -1,0 +1,35 @@
+<div class="admin-bookings">
+  <h1>Бронирования</h1>
+
+  <div class="filters">
+    <select id="statusFilter">
+      <option value="">Все статусы</option>
+      <option value="active">Активные</option>
+      <option value="completed">Завершённые</option>
+      <option value="cancelled_by_client">Отменено клиентом</option>
+      <option value="cancelled_by_provider">Отменено поставщиком</option>
+      <option value="cancelled_by_admin">Отменено администратором</option>
+    </select>
+
+    <input type="date" id="fromDate" />
+    <input type="date" id="toDate" />
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Услуга</th>
+        <th>Клиент</th>
+        <th>Поставщик</th>
+        <th>Дата</th>
+        <th>Статус</th>
+        <th>Сумма</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody id="bookingsBody"></tbody>
+  </table>
+</div>
+
+

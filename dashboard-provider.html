@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Кабинет поставщика — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+
+  <h1>Кабинет поставщика</h1>
+
+  <!-- ⚠️ ONBOARDING WARNING (SOFT) -->
+  <div
+    id="onboardingWarning"
+    class="card"
+    style="
+      display:none;
+      border-left:4px solid #ff9800;
+      background:#fff8e1;
+      margin-bottom:24px;
+    "
+  >
+    <h3 style="margin-top:0;">⚠️ Профиль не завершён</h3>
+
+    <p style="font-size:14px;color:#555;line-height:1.5;">
+      Вы ещё не заполнили данные поставщика.
+      <br>
+      Пока профиль не завершён:
+    </p>
+
+    <ul style="font-size:14px;color:#555;padding-left:18px;">
+      <li>ваши услуги не видны клиентам</li>
+      <li>бронирования не будут поступать</li>
+      <li>выплаты недоступны</li>
+    </ul>
+
+    <a href="provider-onboarding.html" class="btn" style="margin-top:12px;">
+      Заполнить профиль
+    </a>
+  </div>
+
+  <div class="service-layout">
+
+    <!-- ОСНОВНАЯ КОЛОНКА -->
+    <div class="service-main">
+
+      <!-- ОБЗОР -->
+      <div class="card">
+        <h3>📊 Обзор</h3>
+
+        <p style="color:#666;font-size:14px;margin-bottom:20px;">
+          Здесь отображаются ключевые показатели вашего бизнеса на ActiveGo
+        </p>
+
+        <!-- ПЕРЕКЛЮЧАТЕЛЬ ПЕРИОДА -->
+        <div class="stats-period">
+          <button class="period-btn active" data-period="month">Месяц</button>
+          <button class="period-btn" data-period="year">Год</button>
+          <button class="period-btn" data-period="all">Всё время</button>
+        </div>
+
+        <!-- СТАТИСТИКА -->
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-item">
+            <div class="stat-label">💰 Доход</div>
+            <div class="stat-value" id="statIncome">— €</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">💳 К выплате</div>
+            <div class="stat-value" id="statPayout">— €</div>
+            <div class="stat-hint">Выплаты 1 раз в неделю</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">📦 Всего бронирований</div>
+            <div class="stat-value" id="statBookings">—</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">🛎 Предстоящие услуги</div>
+            <div class="stat-value" id="statUpcoming">—</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-label">🟢 Активные услуги</div>
+            <div class="stat-value" id="statServices">—</div>
+          </div>
+
+          <div class="stat-item muted">
+            <div class="stat-label">👁 Интерес к услугам</div>
+            <div class="stat-value">—</div>
+            <div class="stat-hint">Будет доступно позже</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- АНАЛИТИКА (ЗАГЛУШКА) -->
+      <div class="card" style="margin-top:24px;">
+        <h3>📈 Аналитика</h3>
+        <p style="font-size:14px;color:#666;">
+          Графики доходов, загрузки услуг и сезонности
+          будут доступны после накопления данных.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div class="service-sidebar">
+
+      <div class="card" id="providerProfileBox">
+        <p><em>Загрузка профиля…</em></p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="provider-dashboard.js"></script>
+</body>
+</html>

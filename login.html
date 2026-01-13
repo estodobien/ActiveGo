@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+<script type="module" src="header.js"></script>
+
+<div class="container" style="max-width:480px;">
+
+  <h1>Вход</h1>
+
+  <p style="font-size:14px;color:#666;margin-bottom:20px;">
+    Войдите в свой аккаунт ActiveGo
+  </p>
+
+  <!-- ===============================
+       LOGIN FORM
+  =============================== -->
+  <form id="loginForm">
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Email"
+      required
+    >
+    <br><br>
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Пароль"
+      required
+    >
+    <br><br>
+
+    <button type="submit" class="btn" style="width:100%;">
+      Войти
+    </button>
+
+  </form>
+
+  <div id="result" style="margin-top:12px;"></div>
+
+  <!-- ===============================
+       FORGOT PASSWORD
+  =============================== -->
+  <div style="margin-top:12px;text-align:right;">
+    <a
+      href="forgot-password.html"
+      style="font-size:14px;color:var(--primary);"
+    >
+      Забыли пароль?
+    </a>
+  </div>
+
+  <hr style="margin:30px 0;">
+
+  <!-- ===============================
+       GOOGLE LOGIN
+  =============================== -->
+  <p style="font-size:14px;color:#666;margin-bottom:10px;">
+    Или войти через
+  </p>
+
+  <button
+    id="googleLoginBtn"
+    type="button"
+    class="btn btn-outline"
+    style="width:100%;"
+  >
+    <img
+      src="https://www.svgrepo.com/show/475656/google-color.svg"
+      style="width:18px;vertical-align:middle;margin-right:8px;"
+    >
+    Google
+  </button>
+
+  <hr style="margin:30px 0;">
+
+  <!-- ===============================
+       REGISTER LINK
+  =============================== -->
+  <p style="font-size:14px;">
+    Нет аккаунта?
+    <a href="register.html" style="color:var(--primary);">
+      Зарегистрироваться
+    </a>
+  </p>
+
+</div>
+
+<script type="module" src="auth.js"></script>
+
+<script type="module">
+  import { supabase } from './supabaseClient.js';
+
+  const googleBtn = document.getElementById('googleLoginBtn');
+
+  googleBtn.addEventListener('click', async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/oauth-callback.html'
+      }
+    });
+
+    if (error) {
+      alert(error.message);
+    }
+  });
+</script>
+
+</body>
+</html>

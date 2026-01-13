@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Профиль клиента — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+<script type="module" src="header.js"></script>
+
+<div class="container" style="max-width:520px;">
+
+  <h1>Профиль</h1>
+
+  <p style="color:#666;font-size:14px;margin-bottom:20px;">
+    Эти данные помогут нам и поставщикам лучше с вами взаимодействовать.
+  </p>
+
+  <form id="clientProfileForm">
+
+    <!-- ИМЯ -->
+    <label>Имя</label>
+    <input type="text" id="name" required>
+
+    <br><br>
+
+    <!-- EMAIL -->
+    <label>Email</label>
+    <input type="email" id="email" readonly>
+
+    <br><br>
+
+    <!-- СПОСОБ СВЯЗИ -->
+    <label>Предпочтительный способ связи</label>
+    <select id="notify_channel">
+      <option value="">Не выбрано</option>
+      <option value="email">Email</option>
+      <option value="telegram">Telegram</option>
+      <option value="whatsapp">WhatsApp</option>
+    </select>
+
+    <br><br>
+
+    <!-- КОНТАКТ -->
+    <label>Контакт для связи</label>
+    <input
+      type="text"
+      id="notify_value"
+      placeholder="Выберите способ связи выше"
+    >
+
+    <br><br>
+
+    <!-- СТРАНА -->
+    <label>Страна проживания</label>
+    <input type="text" id="country" placeholder="Например: Испания">
+
+    <br><br>
+
+    <!-- ОСНОВНОЙ ЯЗЫК -->
+    <label>Основной язык</label>
+    <select id="language_main">
+      <option value="">Не выбрано</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="pl">Polski</option>
+      <option value="uk">Українська</option>
+    </select>
+
+    <br><br>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ ЯЗЫКИ -->
+    <label>Дополнительные языки</label>
+
+    <div id="extraLanguages" style="margin-bottom:8px;"></div>
+
+    <select id="addLanguageSelect">
+      <option value="">Добавить язык</option>
+      <option value="ru">Русский</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="pl">Polski</option>
+      <option value="uk">Українська</option>
+    </select>
+
+    <br><br><br>
+
+    <button class="btn" style="width:100%;">
+      Сохранить профиль
+    </button>
+
+  </form>
+
+  <div id="result" style="margin-top:16px;"></div>
+
+</div>
+
+<script type="module" src="profile-client.js"></script>
+
+</body>
+</html>

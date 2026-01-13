@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Услуга — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+
+  <h1 id="serviceTitle">Услуга</h1>
+
+  <!-- =========================
+       ТАБЫ
+  ========================== -->
+  <div class="tabs">
+  <button class="tab" data-tab="availability" type="button">
+    📅 Даты и места
+  </button>
+
+  <button class="tab" data-tab="details" type="button">
+    ℹ️ Описание
+  </button>
+
+  <button class="tab" data-tab="stats" type="button">
+    📊 Статистика
+  </button>
+
+  <button class="tab" data-tab="edit" type="button">
+    ✏️ Редактирование
+  </button>
+</div>
+
+  <!-- =========================
+       ДОСТУПНОСТЬ
+  ========================== -->
+  <div class="tab-content" id="tab-availability">
+
+    <!-- ДАТЫ (ТУРЫ / АКТИВНОСТИ) -->
+    <div class="card">
+      <h2>Даты и доступность</h2>
+
+      <form id="addDateForm" class="booking-row">
+        <input type="date" id="date" required>
+        <input type="number" id="capacity" placeholder="Мест" min="1" required>
+        <input type="number" id="price_override" placeholder="Цена (€)">
+        <button class="btn btn-small">Добавить</button>
+      </form>
+
+      <div id="datesList" style="margin-top:20px;"></div>
+    </div>
+
+    <!-- НЕДОСТУПНОСТЬ (АРЕНДА) -->
+    <div
+      class="card"
+      id="unavailabilityBlock"
+      style="margin-top:30px; display:none;"
+    >
+      <h2>Недоступные периоды</h2>
+
+      <p style="font-size:14px;color:#666;margin-bottom:12px;">
+        Вы можете полностью или частично ограничить доступность услуги.
+      </p>
+
+      <form id="addUnavailabilityForm" class="booking-row">
+
+        <input type="date" id="unavailableFrom" required>
+        <input type="date" id="unavailableTo" required>
+
+        <input
+          type="number"
+          id="blockedUnits"
+          min="1"
+          placeholder="Недоступно (шт.)"
+          style="max-width:160px;"
+        >
+
+        <input
+          type="text"
+          id="unavailableReason"
+          placeholder="Причина (необязательно)"
+        >
+
+        <button class="btn btn-small">Добавить</button>
+      </form>
+
+      <p style="font-size:12px;color:#666;margin-top:6px;line-height:1.4;">
+        • Пустое количество — услуга полностью недоступна<br>
+        • Число — недоступно указанное количество
+      </p>
+
+      <div id="unavailabilityList" style="margin-top:20px;"></div>
+    </div>
+
+  </div>
+
+  <!-- =========================
+       ДЕТАЛИ (READ-ONLY)
+  ========================== -->
+  <div class="tab-content" id="tab-details" style="display:none;">
+    <div class="card">
+      <p><strong>Название:</strong> <span id="detailTitle"></span></p>
+      <p><strong>Описание:</strong> <span id="detailDescription"></span></p>
+      <p><strong>Цена:</strong> <span id="detailPrice"></span> €</p>
+      <p><strong>Статус:</strong> <span id="detailStatus"></span></p>
+    </div>
+  </div>
+
+  <!-- =========================
+       СТАТИСТИКА (ПОКА ЗАГЛУШКА)
+  ========================== -->
+  <div class="tab-content" id="tab-stats" style="display:none;">
+    <div class="card">
+      <p>Статистика будет доступна после первых бронирований.</p>
+    </div>
+  </div>
+
+  <!-- =========================
+     РЕДАКТИРОВАНИЕ (МОДЕРАЦИЯ)
+========================= -->
+<div class="tab-content" id="tab-edit" style="display:none;">
+
+  <form id="editServiceForm" class="card">
+
+    <h2 style="margin-bottom:16px;">✏️ Редактирование услуги</h2>
+
+    <p style="font-size:14px;color:#666;margin-bottom:20px;">
+      Здесь вы можете изменить описание и условия услуги.
+      Все изменения отправляются на модерацию и вступят в силу после проверки.
+    </p>
+
+    <!-- ===== ОСНОВНАЯ ИНФОРМАЦИЯ ===== -->
+    <div class="form-section">
+      <h3>Основная информация</h3>
+
+      <div class="booking-field">
+        <label>Название услуги</label>
+        <input type="text" id="title" required>
+      </div>
+
+      <div class="booking-field">
+        <label>Описание услуги</label>
+        <textarea
+          id="description"
+          rows="12"
+          placeholder="Подробно опишите услугу: как проходит, что включено, что важно знать клиенту"
+          required
+        ></textarea>
+      </div>
+
+      <div class="booking-field">
+        <label>Базовая цена (€)</label>
+        <input type="number" id="price" min="0" required>
+      </div>
+      <!-- ОБЩЕЕ КОЛИЧЕСТВО ЕДИНИЦ (ТОЛЬКО ДЛЯ АРЕНДЫ) -->
+<div
+  class="booking-field"
+  id="totalUnitsField"
+  style="display:none;"
+>
+  <label>Общее количество техники</label>
+  <input
+    type="number"
+    id="total_units"
+    min="1"
+    placeholder="Например: 10"
+  >
+  <small style="color:#666;">
+    Используется для расчёта доступности аренды
+  </small>
+</div>
+</div>
+
+    <!-- ===== ЛОКАЦИЯ И КОНТАКТ ===== -->
+<div class="form-section" style="margin-top:30px;">
+  <h3>Локация и контакт</h3>
+
+  <div class="booking-field">
+    <label>Адрес проведения услуги</label>
+    <input
+      type="text"
+      id="meeting_address"
+      placeholder="Например: Plaza Luceros, Alicante"
+    >
+  </div>
+
+  <div class="booking-field">
+    <label>Google Maps (ссылка на точку встречи)</label>
+    <input
+      type="url"
+      id="meeting_map_link"
+      placeholder="https://maps.google.com/…"
+    >
+  </div>
+
+  <div class="booking-field">
+    <label>Контактный телефон</label>
+    <input
+      type="text"
+      id="contact_phone"
+      placeholder="+34 600 000 000"
+    >
+  </div>
+</div>
+
+    <!-- ===== ВАЖНО ===== -->
+    <div
+      class="form-section"
+      style="
+        margin-top:30px;
+        padding:16px;
+        border:1px solid #f2c94c;
+        border-radius:8px;
+        background:#fffbea;
+      "
+    >
+      <strong>⚠️ Важно</strong>
+      <p style="font-size:14px;margin-top:8px;color:#555;">
+        После отправки изменений услуга временно уходит на проверку.
+        Пока идёт модерация, клиенты будут видеть предыдущую версию услуги.
+      </p>
+    </div>
+
+    <!-- ===== SUBMIT ===== -->
+    <div style="margin-top:30px;">
+      <button class="btn" type="submit">
+        📤 Отправить изменения на модерацию
+      </button>
+
+      <p
+        id="result"
+        style="margin-top:12px;font-size:14px;color:#666;"
+      ></p>
+    </div>
+
+  </form>
+
+</div>
+
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="edit-service.js"></script>
+
+</body>
+</html>

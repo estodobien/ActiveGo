@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить услугу — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+  <h1 id="pageTitle">Добавить новую услугу</h1>
+
+<p id="pageHint" style="font-size:14px;color:#666;margin-bottom:20px;">
+  После сохранения услуга будет отправлена на модерацию.
+  Обычно проверка занимает до 24 часов.
+</p>
+
+  <form id="addServiceForm" class="card">
+
+    <!-- Тип услуги -->
+    <div class="booking-field">
+      <label>Тип услуги</label>
+      <select id="activityType" required>
+        <option value="">Выберите тип</option>
+        <option value="rental">Аренда</option>
+        <option value="tour">Экскурсия / тур</option>
+        <option value="experience">Активность</option>
+        <option value="accommodation">Проживание</option>
+        <option value="restaurant">Ресторан</option>
+      </select>
+      <small>Тип услуги определяет набор дополнительных полей ниже</small>
+    </div>
+
+    <!-- Как считается цена -->
+    <div class="booking-field">
+      <label>Как считается цена</label>
+      <select id="pricing_type" required>
+        <option value="per_person">За человека</option>
+        <option value="per_unit">За единицу (объект, транспорт)</option>
+      </select>
+      <small>
+        Для аренды и проживания цена считается за единицу.
+        Для экскурсий, активностей и ресторанов — за человека.
+      </small>
+    </div>
+
+    <!-- Что бронирует клиент -->
+    <div class="booking-field">
+      <label>Что бронирует клиент</label>
+      <select id="unit_label" required>
+        <option value="person" data-pricing="per_person">Человек</option>
+        <option value="bike" data-pricing="per_unit">Велосипед</option>
+        <option value="car" data-pricing="per_unit">Автомобиль</option>
+        <option value="sup" data-pricing="per_unit">SUP-доска</option>
+        <option value="room" data-pricing="per_unit">Комната</option>
+        <option value="apartment" data-pricing="per_unit">Апартаменты</option>
+        <option value="table" data-pricing="per_person">Место за столом</option>
+      </select>
+      <small>
+        Используется для интерфейса (не влияет на расчёт)
+      </small>
+    </div>
+
+    <!-- Название -->
+    <div class="booking-field">
+      <label>Название услуги</label>
+      <input type="text" id="title" required>
+      <small>Короткое и понятное название для клиентов</small>
+    </div>
+
+    <!-- Описание -->
+    <div class="booking-field">
+      <label>Описание услуги</label>
+      <textarea id="description" rows="8" required
+        placeholder="Опишите, что именно получит клиент и на каких условиях"></textarea>
+      <small>Основное описание, которое увидит клиент</small>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="booking-field" id="serviceFlowField">
+      <label>Как проходит услуга</label>
+      <textarea id="serviceFlow" rows="6"
+        placeholder="Опишите процесс: встреча, основная часть, завершение"></textarea>
+      <small>Помогает клиенту понять формат услуги</small>
+    </div>
+
+    <!-- Цена -->
+    <div class="booking-field">
+      <label>Цена (€)</label>
+      <input type="number" id="price" min="1" required>
+      <small>
+        Цена за <span id="priceUnitLabel">человека</span>
+      </small>
+    </div>
+
+    <!-- ===== TOUR ===== -->
+<div id="tourFields" style="display:none;border-top:1px solid #eee;padding-top:15px;margin-top:20px;">
+  <h3>Параметры тура</h3>
+
+  <div class="booking-field">
+    <label>Максимальное количество участников</label>
+    <input type="number" id="tourCapacity" min="1">
+    <small>
+      Общее количество мест на каждый тур
+    </small>
+  </div>
+
+  <div class="booking-field">
+    <label>Дата первого тура</label>
+    <input type="date" id="tourDate">
+    <small>
+      Вы сможете добавить новые даты позже в редакторе услуги.
+      Не удаляйте услугу — добавляйте даты.
+    </small>
+  </div>
+</div>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <div id="experienceFields" style="display:none;border-top:1px solid #eee;padding-top:15px;margin-top:20px;">
+      <h3>Параметры активности</h3>
+
+      <div class="booking-field">
+        <label>Минимальный возраст</label>
+        <input type="number" id="experienceMinAge" min="0">
+      </div>
+
+      <div class="booking-field">
+        <label>Уровень сложности</label>
+        <select id="experienceDifficulty">
+          <option value="">Не указан</option>
+          <option value="easy">Лёгкий</option>
+          <option value="medium">Средний</option>
+          <option value="hard">Сложный</option>
+        </select>
+      </div>
+
+      <div class="booking-field">
+        <label><input type="checkbox" id="experienceWeather"> Зависит от погодных условий</label>
+      </div>
+
+      <div class="booking-field">
+        <label><input type="checkbox" id="experienceKids"> Подходит для детей</label>
+      </div>
+    </div>
+
+    <!-- ===== ACCOMMODATION ===== -->
+    <div id="accommodationFields" style="display:none;border-top:1px solid #eee;padding-top:15px;margin-top:20px;">
+      <h3>Параметры проживания</h3>
+
+      <div class="booking-field">
+        <label>Тип жилья</label>
+        <select id="accommodationType">
+          <option value="apartment">Апартаменты</option>
+          <option value="room">Комната</option>
+          <option value="house">Дом</option>
+          <option value="studio">Студия</option>
+          <option value="villa">Вилла</option>
+        </select>
+      </div>
+
+      <div class="booking-field">
+        <label>Максимум гостей</label>
+        <input type="number" id="accommodationGuests" min="1">
+      </div>
+
+      <div class="booking-field">
+        <label>Спальни</label>
+        <input type="number" id="accommodationBedrooms" min="0">
+      </div>
+
+      <div class="booking-field">
+        <label>Ванные комнаты</label>
+        <input type="number" id="accommodationBathrooms" min="0">
+      </div>
+
+      <div class="booking-field">
+        <label><input type="checkbox" id="accommodationKids"> Можно с детьми</label>
+      </div>
+
+      <div class="booking-field">
+        <label><input type="checkbox" id="accommodationPets"> Можно с животными</label>
+      </div>
+
+      <div class="booking-field">
+        <label>Удобства</label>
+        <input type="text" id="accommodationAmenities">
+      </div>
+    </div>
+
+    <!-- ===== RENTAL ===== -->
+    <div id="rentalFields" style="display:none;border-top:1px solid #eee;padding-top:15px;margin-top:20px;">
+      <h3>Параметры аренды</h3>
+<div class="booking-field">
+  <label>Общее количество единиц</label>
+  <input type="number" id="totalUnits" min="1">
+  <small>
+    Сколько одинаковых объектов доступно для аренды
+  </small>
+</div>
+
+      <div class="booking-field">
+        <label>Единица цены</label>
+        <select id="rentalPriceUnit">
+          <option value="day">За день</option>
+          <option value="week">За неделю</option>
+          <option value="month">За месяц</option>
+        </select>
+      </div>
+
+      <div class="booking-field">
+        <label><input type="checkbox" id="depositRequired"> Требуется депозит</label>
+      </div>
+
+      <div class="booking-field">
+        <label>Сумма депозита (€)</label>
+        <input type="number" id="depositAmount" min="0">
+      </div>
+
+      <div class="booking-field">
+        <label>Необходимые документы</label>
+        <input type="text" id="documentsRequired">
+      </div>
+
+      <div class="booking-field">
+        <label>Что включено в аренду</label>
+        <input type="text" id="includedItems">
+      </div>
+    </div>
+
+    <!-- ===== RESTAURANT ===== -->
+    <div id="restaurantFields" style="display:none;border-top:1px solid #eee;padding-top:15px;margin-top:20px;">
+      <h3>Параметры ресторана</h3>
+
+      <div class="booking-field">
+        <label>Тип предложения</label>
+        <select id="restaurantOfferType">
+          <option value="table">Бронь стола</option>
+          <option value="event">Событие / шоу</option>
+          <option value="set">Сет / дегустация</option>
+        </select>
+      </div>
+
+      <div class="booking-field">
+        <label>Тип кухни</label>
+        <input type="text" id="restaurantCuisine">
+      </div>
+
+      <div class="booking-field">
+        <label>Формат заведения</label>
+        <select id="restaurantFormat">
+          <option value="cafe">Кафе</option>
+          <option value="restaurant">Ресторан</option>
+          <option value="bar">Бар</option>
+          <option value="lounge">Lounge</option>
+          <option value="fine_dining">Fine dining</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- DURATION -->
+    <div class="booking-field" id="durationField">
+      <label>Длительность (часы)</label>
+      <div style="display:flex;gap:10px;">
+        <input type="number" id="durationMin" placeholder="От">
+        <input type="number" id="durationMax" placeholder="До">
+      </div>
+    </div>
+
+    <!-- Адрес -->
+    <div class="booking-field">
+      <label>Адрес проведения услуги</label>
+      <input type="text" id="meetingAddress" required>
+    </div>
+
+    <div class="booking-field">
+      <label>Google Maps</label>
+      <input type="url" id="meetingMapLink" required>
+    </div>
+
+    <!-- Инструкции -->
+    <div class="booking-field">
+      <label>Инструкции для клиента</label>
+      <textarea id="eventDayInstructions" rows="5" required></textarea>
+    </div>
+
+    <!-- Контакт -->
+    <div class="booking-field">
+      <label>Контакт для связи</label>
+      <input type="text" id="contactPhone" required>
+    </div>
+
+    <!-- Отмена -->
+    <div class="booking-field">
+      <label>Правила отмены</label>
+      <textarea id="cancellationPolicy" rows="3"></textarea>
+    </div>
+
+    <!-- Фото -->
+    <div class="booking-field">
+      <label>Главное фото</label>
+      <input type="file" id="mainImage" required>
+    </div>
+
+    <div class="booking-field">
+      <label>Галерея</label>
+      <input type="file" id="galleryImages" multiple>
+    </div>
+
+    <button class="btn" type="submit" id="submitBtn">
+  Отправить на модерацию
+</button>
+
+    <p id="result"></p>
+  </form>
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="add-service.js"></script>
+
+<script>
+  const activityType = document.getElementById('activityType');
+  const pricingType = document.getElementById('pricing_type');
+  const unitLabel = document.getElementById('unit_label');
+  const priceUnitLabel = document.getElementById('priceUnitLabel');
+
+  function syncPricing() {
+    // АРЕНДА — ЖЁСТКО
+    if (activityType.value === 'rental') {
+      pricingType.value = 'per_unit';
+      pricingType.disabled = true;
+      priceUnitLabel.textContent = 'единицу';
+      return;
+    }
+
+    // ДРУГИЕ ТИПЫ — КАК БЫЛО
+    pricingType.disabled = false;
+
+    const selectedUnit = unitLabel.options[unitLabel.selectedIndex];
+    const requiredPricing = selectedUnit.dataset.pricing;
+
+    pricingType.value = requiredPricing;
+    priceUnitLabel.textContent =
+      requiredPricing === 'per_unit' ? 'единицу' : 'человека';
+  }
+
+  activityType.addEventListener('change', syncPricing);
+  unitLabel.addEventListener('change', syncPricing);
+
+  // вызов при загрузке страницы
+  syncPricing();
+</script>
+
+</body>
+</html>

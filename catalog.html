@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Каталог услуг — ActiveGo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="header"></div>
+
+  <!-- BREADCRUMBS -->
+<div class="container" style="padding-bottom: 0;">
+  <nav class="breadcrumbs">
+    <a href="index.html">Главная</a>
+    <span>›</span>
+    <span>Каталог</span>
+  </nav>
+</div>
+
+  <!-- PAGE HEADER -->
+  <div class="container" style="padding-bottom: 0;">
+    <h1 style="margin-bottom: 8px;">Каталог услуг</h1>
+    <p style="color: var(--muted); margin-top: 0;">
+      Экскурсии, активности и трансферы
+    </p>
+
+    <!-- 🔍 ПОИСК (ТОТ ЖЕ КОМПОНЕНТ, ЧТО НА ГЛАВНОЙ) -->
+    <div style="margin: 24px 0 8px;">
+      <div class="search-box">
+
+        <div class="search-input-wrapper">
+          <span class="search-icon" id="searchIcon">🔍</span>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Найти интересующую вас услугу"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="search-suggestions" id="searchSuggestions">
+          <div class="suggestion all" data-type="">Все услуги</div>
+          <div class="suggestion rental" data-type="rental">Аренда</div>
+          <div class="suggestion tour" data-type="tour">Туры</div>
+        </div>
+
+      </div>
+    </div>
+    <!-- 🔍 КОНЕЦ ПОИСКА -->
+
+  </div>
+
+  <!-- SERVICES GRID -->
+  <div class="container">
+    <div id="servicesContainer">
+      <!-- Карточки услуг добавляются через JS -->
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script type="module" src="header.js"></script>
+  <script type="module" src="catalog.js"></script>
+
+</body>
+</html>

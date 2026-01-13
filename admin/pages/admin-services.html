@@ -1,0 +1,32 @@
+<div class="admin-services">
+  <h1>Услуги</h1>
+
+  <div class="filters">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Поиск по названию..."
+    />
+
+    <select id="statusFilter">
+      <option value="">Все статусы</option>
+      <option value="active">Активные</option>
+      <option value="blocked">Заблокированные</option>
+    </select>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Поставщик</th>
+        <th>Цена</th>
+        <th>Статус</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="servicesTableBody"></tbody>
+  </table>
+</div>
+
+

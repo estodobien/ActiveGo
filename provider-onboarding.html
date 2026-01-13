@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Профиль поставщика</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="container" style="max-width:600px;">
+
+  <h1>Профиль поставщика</h1>
+
+  <p style="color:#666;margin-bottom:24px;">
+    Заполните информацию о вашей деятельности.
+    Это необходимо для модерации и начала работы на платформе.
+  </p>
+
+  <form id="providerOnboardingForm">
+
+    <h3>🏢 Компания / деятельность</h3>
+
+    <input type="text" id="company_name"
+      placeholder="Название компании или имя" required><br><br>
+
+    <select id="provider_type" required>
+      <option value="">Тип поставщика</option>
+      <option value="individual">Физическое лицо</option>
+      <option value="autonomo">Autónomo / ИП</option>
+      <option value="company">Компания</option>
+    </select><br><br>
+
+    <textarea id="activity_description"
+      placeholder="Кратко опишите вашу деятельность"
+      rows="4" required></textarea><br><br>
+
+    <h3>🌍 География</h3>
+
+    <input type="text" id="country"
+      placeholder="Страна деятельности" required><br><br>
+
+    <input type="text" id="city"
+      placeholder="Город / регион" required><br><br>
+
+    <h3>🧾 Юридическая информация</h3>
+
+    <input type="text" id="tax_number"
+      placeholder="Налоговый номер (NIE / NIF / VAT)" required><br><br>
+
+    <h3>📞 Связь с администрацией</h3>
+
+    <p style="font-size:14px;color:#666;">
+      Укажите, как администрация ActiveGo может связаться с вами
+      по вопросам модерации и заказов.
+    </p>
+
+    <select id="admin_contact_type" required>
+      <option value="">Выберите способ связи</option>
+      <option value="telegram">Telegram</option>
+      <option value="whatsapp">WhatsApp</option>
+      <option value="email">Email</option>
+    </select><br><br>
+
+    <input type="text" id="admin_contact_value"
+      placeholder="Введите контакт"
+      required><br><br>
+
+    <button type="submit" class="btn">
+      Отправить на модерацию
+    </button>
+
+  </form>
+
+  <div id="result" style="margin-top:16px;"></div>
+
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="provider-onboarding.js"></script>
+
+<script>
+  const typeSelect = document.getElementById('admin_contact_type');
+  const valueInput = document.getElementById('admin_contact_value');
+
+  typeSelect.addEventListener('change', () => {
+    if (typeSelect.value === 'telegram') {
+      valueInput.placeholder = 'Telegram username или ID';
+    } else if (typeSelect.value === 'whatsapp') {
+      valueInput.placeholder = 'Номер WhatsApp (с кодом страны)';
+    } else if (typeSelect.value === 'email') {
+      valueInput.placeholder = 'Email для связи';
+    } else {
+      valueInput.placeholder = 'Введите контакт';
+    }
+  });
+</script>
+
+</body>
+</html>

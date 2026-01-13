@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<div class="container">
+
+  <div class="service-layout dashboard-layout">
+
+    <!-- ЛЕВАЯ КОЛОНКА: БРОНИРОВАНИЯ -->
+    <div class="service-main">
+
+      <h1 style="margin-bottom: 8px;">Мои бронирования</h1>
+      <p style="color: var(--muted); margin-top: 0;">
+        Все ваши текущие и завершённые поездки
+      </p>
+
+      <!-- АКТИВНЫЕ -->
+      <h2 class="section-title">Активные бронирования</h2>
+      <div id="activeBookings" class="booking-list">
+        <p><em>Загрузка…</em></p>
+      </div>
+
+      <!-- ПРОШЛЫЕ -->
+      <h2 class="section-title">Прошлые бронирования</h2>
+      <div id="pastBookings" class="booking-list">
+        <p><em>Загрузка…</em></p>
+      </div>
+
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА: ПРОФИЛЬ -->
+    <div class="service-sidebar">
+
+      <div class="profile-card" id="profileBox">
+        <p><em>Загрузка профиля…</em></p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script type="module" src="header.js"></script>
+<script type="module" src="dashboard.js"></script>
+
+</body>
+</html>
